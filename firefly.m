@@ -10,13 +10,13 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function firefly
+function [mean_data, gbestval] = firefly(run_no,maxgen,fnbw,NULL1,NULL2,NULL3)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',243256);
 rand('twister',343499); 
 n=40 ; %number of fireflies
-MaxGeneration=1000;%number of pseudo time steps
+MaxGeneration=maxgen;%number of pseudo time steps
 
      % Randomness 0--1 (highly random)
 betamin=0.20;     % minimum value of beta
@@ -28,7 +28,7 @@ fnc='non_uniform_penalty';
 d=14; % dimension of the problem
 Lb=0*ones(1,d);
 Ub=0.8*ones(1,d);
-runno=5;
+runno=run_no;
 data=zeros(runno,MaxGeneration);
 % Initial random guess
 
@@ -93,7 +93,7 @@ for k=1:MaxGeneration,     %%%%% start iterations
 
 % Evaluate new solutions (for all n fireflies)
 for i=1:n,
-   zn(i)=feval(fnc,ns(i,:));
+   zn(i)=feval(fnc,fnbw,NULL1,NULL2,NULL3,ns(i,:));
    Lightn(i)=zn(i);
 end
 
@@ -150,9 +150,10 @@ assignin('base','gbest_find',gbest_find);
 assignin('base','gbestval',gbestval_find);
 assignin('base','data',data);
 
-figure(1);
+%figure(1);
 %plot([0,1:iteration],tr);
-plot(mean(data));
+%plot(mean(data));
+mean_data=mean(data);
 toc;
  
 return

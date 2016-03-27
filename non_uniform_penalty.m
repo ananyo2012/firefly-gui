@@ -1,12 +1,12 @@
-function cost=non_uniform_penalty(x,varargin)
+function cost=non_uniform_penalty(fnbw,ZN1,ZN2,ZN3,x,varargin)
 
-FNBWD=8.35;
+FNBWD=fnbw;
 tol=(12.0/100)*FNBWD;
 P1=10^6;
 P2=10^6;
 lb1=-90;ub1=90; 
  step=.1;ed=(ub1-lb1)/step;
- NULL(1)=30;NULL(2)=32.5;NULL(3)=35;
+ NULL(1)=ZN1;NULL(2)=ZN2;NULL(3)=ZN3;
  NULL(1)=((NULL(1)-lb1)/step)+1;
  NULL(2)=((NULL(2)-lb1)/step)+1;
  NULL(3)=((NULL(3)-lb1)/step)+1;

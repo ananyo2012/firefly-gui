@@ -10,24 +10,24 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval] = firefly(run_no,maxgen,fnbw,NULL1,NULL2,NULL3)
+function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',243256);
 rand('twister',343499); 
-n=40 ; %number of fireflies
+n=firefly_no ; %number of fireflies
 MaxGeneration=maxgen;%number of pseudo time steps
 
      % Randomness 0--1 (highly random)
-betamin=0.20;     % minimum value of beta
-gamma=1;         % Absorption coefficient
+betamin=beta;     % minimum value of beta = 0.20
+gamma=gama;         % Absorption coefficient = 1
 fnc='non_uniform_penalty';
 %NumberOfElites=2;
 
 % Simple bounds/limits for d-dimensional problems
-d=14; % dimension of the problem
-Lb=0*ones(1,d);
-Ub=0.8*ones(1,d);
+d=dim; % dimension of the problem = 14
+Lb=lbound*ones(1,d); % Sample value = 0 
+Ub=ubound*ones(1,d); % Sample value = 0.8
 runno=run_no;
 data=zeros(runno,MaxGeneration);
 % Initial random guess
@@ -76,7 +76,7 @@ data=zeros(runno,MaxGeneration);
 for run=1:runno
 % Calcualte dimension
 
-alpha=0.9; 
+alpha=alfa; % Sample value = 0.9
 u0=Lb+(Ub-Lb).*rand(1,d);
 d=length(u0);
 % Initial values of an array

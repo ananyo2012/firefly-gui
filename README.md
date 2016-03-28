@@ -2,6 +2,7 @@
 This a Matlab GUI designed to run the [Firefly](https://en.wikipedia.org/wiki/Firefly_algorithm) algorithm.
 
 To run the GUI you can use any of these methods below.
+
 1. Open the folder in Matlab and type `run gui` in the Command window.  **OR**
 2. Right click on **gui.fig** and choose _Open in GUIDE_.After the fig file opens choose the _Run_ button or Press _Ctrl+T_  **OR**
 3. Simply open the **gui.m** file and Press the Run button or _F5_.this is perhaps the most simplest method!

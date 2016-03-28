@@ -1,12 +1,12 @@
 function cost=non_uniform_penalty(fnbw,ZN1,ZN2,ZN3,x,varargin)
 
-FNBWD=fnbw;
+FNBWD=fnbw; % Sample value = 8.35
 tol=(12.0/100)*FNBWD;
 P1=10^6;
 P2=10^6;
 lb1=-90;ub1=90; 
  step=.1;ed=(ub1-lb1)/step;
- NULL(1)=ZN1;NULL(2)=ZN2;NULL(3)=ZN3;
+ NULL(1)=ZN1;NULL(2)=ZN2;NULL(3)=ZN3;   %Sample values: NULL(1)=30 NULL(2)=32.5 NULL(3)=35
  NULL(1)=((NULL(1)-lb1)/step)+1;
  NULL(2)=((NULL(2)-lb1)/step)+1;
  NULL(3)=((NULL(3)-lb1)/step)+1;
@@ -75,8 +75,8 @@ lb1=-90;ub1=90;
  if db_npencil_array(NULL(2))<NULLD, err2=0;else err2=abs(db_npencil_array(NULL(2))-NULLD);end
  if db_npencil_array(NULL(3))<NULLD, err3=0;else err3=abs(db_npencil_array(NULL(3))-NULLD);end
  if FNBW<FNBWD, err4=0; else err4=abs(FNBW-FNBWD);end
-  %r=max(0,db_npencil_array(NULL(1))-NULLD)+max(0,db_npencil_array(NULL(2))-NULLD)+max(0,db_npencil_array(NULL(3))-NULLD);
-  cost=max_SLL+P1*max(0,abs(FNBW-FNBWD)-tol);
+  r=max(0,db_npencil_array(NULL(1))-NULLD)+max(0,db_npencil_array(NULL(2))-NULLD)+max(0,db_npencil_array(NULL(3))-NULLD);
+  cost=max_SLL+P1*max(0,abs(FNBW-FNBWD)-tol)*r;
  % cost=max_SLL+err1^2+err2^2+err3^2+err4^2;
 %   if cost>0, 
 %   cost=0; 

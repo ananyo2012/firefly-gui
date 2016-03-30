@@ -10,7 +10,7 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3)
+function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3,filename)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',243256);
@@ -21,7 +21,7 @@ MaxGeneration=maxgen;%number of pseudo time steps
      % Randomness 0--1 (highly random)
 betamin=beta;     % minimum value of beta = 0.20
 gamma=gama;         % Absorption coefficient = 1
-fnc='non_uniform_penalty';
+fnc=filename;
 %NumberOfElites=2;
 
 % Simple bounds/limits for d-dimensional problems

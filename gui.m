@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 28-Mar-2016 04:07:35
+% Last Modified by GUIDE v2.5 28-Mar-2016 19:48:21
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -92,7 +92,10 @@ function execute_Callback(hObject, eventdata, handles)
     NULL2=str2num(get(handles.null2,'String'));
     NULL3=str2num(get(handles.null3,'String'));
     
-    [mean_data, gbestval,worst, std_deviation, Mean] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3);
+    addpath(handles.path);
+    fname =handles.file;
+    filename = fname(1:length(fname)-2);
+    [mean_data, gbestval,worst, std_deviation, Mean] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3,filename);
     
     comet(mean_data);
     
@@ -517,3 +520,16 @@ function worst_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in Browse.
+function Browse_Callback(hObject, eventdata, handles)
+% hObject    handle to Browse (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[filename pathname] = uigetfile({'*.m'},'File Selector');
+fullpathname = strcat(pathname, filename);
+set(handles.display,'String', fullpathname);
+handles.file = filename;
+handles.path = pathname;
+guidata(hObject,handles);

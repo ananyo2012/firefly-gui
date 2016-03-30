@@ -87,15 +87,11 @@ function execute_Callback(hObject, eventdata, handles)
     dim=str2num(get(handles.dim,'String'));
     lbound=str2num(get(handles.lbound,'String'));
     ubound=str2num(get(handles.ubound,'String'));
-    fnbw=str2num(get(handles.fnbw,'String'));
-    NULL1=str2num(get(handles.null1,'String'));
-    NULL2=str2num(get(handles.null2,'String'));
-    NULL3=str2num(get(handles.null3,'String'));
     
     addpath(handles.path);
     fname =handles.file;
     filename = fname(1:length(fname)-2);
-    [mean_data, gbestval,worst, std_deviation, Mean] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3,filename);
+    [mean_data, gbestval,worst, std_deviation, Mean] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename);
     
     comet(mean_data);
     
@@ -154,99 +150,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-
-function fnbw_Callback(hObject, eventdata, handles)
-% hObject    handle to fnbw (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of fnbw as text
-%        str2double(get(hObject,'String')) returns contents of fnbw as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function fnbw_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to fnbw (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function null1_Callback(hObject, eventdata, handles)
-% hObject    handle to null1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of null1 as text
-%        str2double(get(hObject,'String')) returns contents of null1 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function null1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to null1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function null2_Callback(hObject, eventdata, handles)
-% hObject    handle to null2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of null2 as text
-%        str2double(get(hObject,'String')) returns contents of null2 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function null2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to null2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function null3_Callback(hObject, eventdata, handles)
-% hObject    handle to null3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of null3 as text
-%        str2double(get(hObject,'String')) returns contents of null3 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function null3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to null3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
 function gbest_Callback(hObject, eventdata, handles)
 % hObject    handle to gbest (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -267,30 +170,6 @@ function gbest_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
-
-
-function edit9_Callback(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit9 as text
-%        str2double(get(hObject,'String')) returns contents of edit9 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit9_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
 
 
 function fireflyno_Callback(hObject, eventdata, handles)

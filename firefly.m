@@ -10,7 +10,7 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,fnbw,NULL1,NULL2,NULL3,filename)
+function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',243256);
@@ -93,7 +93,7 @@ for k=1:MaxGeneration,     %%%%% start iterations
 
 % Evaluate new solutions (for all n fireflies)
 for i=1:n,
-   zn(i)=feval(fnc,fnbw,NULL1,NULL2,NULL3,ns(i,:));
+   zn(i)=feval(fnc,ns(i,:));
    Lightn(i)=zn(i);
 end
 

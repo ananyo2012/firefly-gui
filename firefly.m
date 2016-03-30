@@ -10,7 +10,7 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename)
+function [mean_data, gbestval, worst, std_deviation, Mean] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename,handles)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',243256);
@@ -115,6 +115,10 @@ nbest=ns(1,:); Lightbest=Lightn(1);
 % For output only
 fbest=Lightbest;
  fprintf('Run=%d Iter=%d BestFitnessValue=%g\n',run,k,fbest);
+ set(handles.runs,'String',num2str(run));
+ set(handles.iterations,'String',num2str(k));
+ set(handles.bestfit,'String',num2str(fbest));
+ drawnow;
       data(run,k)=fbest;
  gbest_data(run,:)=nbest;
 % Move all fireflies to the better locations

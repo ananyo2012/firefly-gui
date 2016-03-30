@@ -1,4 +1,4 @@
-function cost=non_uniform_penalty(x,varargin)
+function cost=non_uniform_penalty(d,x,varargin)
 
 FNBWD=8.35;
 tol=(12.0/100)*FNBWD;
@@ -11,7 +11,7 @@ lb1=-90;ub1=90;
  NULL(2)=((NULL(2)-lb1)/step)+1;
  NULL(3)=((NULL(3)-lb1)/step)+1;
  NULLD=-60;
-  N=14; %Number of element
+  N=d; %Number of element
   d(1)=x(1);
   ii=1:N;s(ii)=1;%Uniform excitation current
   for ii=2:N

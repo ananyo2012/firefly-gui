@@ -26,8 +26,16 @@ fnc=filename;
 
 % Simple bounds/limits for d-dimensional problems
 d=dim; % dimension of the problem = 14
-Lb=lbound*ones(1,d); % Sample value = 0 
-Ub=ubound*ones(1,d); % Sample value = 0.8
+if length(lbound) > 1
+    Lb=lbound;
+else
+    Lb=lbound*ones(1,d); % Sample value = 0 
+end
+if length(ubound) > 1
+    Ub=ubound;
+else
+    Ub=ubound*ones(1,d); % Sample value = 0.8
+end
 runno=run_no;
 data=zeros(runno,MaxGeneration);
 % Initial random guess
@@ -93,7 +101,7 @@ for k=1:MaxGeneration,     %%%%% start iterations
 
 % Evaluate new solutions (for all n fireflies)
 for i=1:n,
-   zn(i)=feval(fnc,ns(i,:));
+   zn(i)=feval(fnc,d,ns(i,:));
    Lightn(i)=zn(i);
 end
 

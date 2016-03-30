@@ -91,7 +91,7 @@ function execute_Callback(hObject, eventdata, handles)
     addpath(handles.path);
     fname =handles.file;
     filename = fname(1:length(fname)-2);
-    [mean_data, gbestval,worst, std_deviation, Mean] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
+    [mean_data, gbestval,worst, std_deviation, Mean, eltime] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
     
     comet(mean_data);
     
@@ -99,6 +99,7 @@ function execute_Callback(hObject, eventdata, handles)
     set(handles.mean,'String',Mean);
     set(handles.std_deviation,'String',std_deviation);
     set(handles.worst,'String',worst);
+    set(handles.eltime,'String',eltime);
 
 
 function runno_Callback(hObject, eventdata, handles)

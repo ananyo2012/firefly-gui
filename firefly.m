@@ -10,11 +10,11 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval, worst, std_deviation, Mean, eltime] = firefly(firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename,handles)
+function [mean_data, gbestval, worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename,handles)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
-randn('state',243256);
-rand('twister',343499); 
+randn('state',randnseed); %sample seed = 243256
+rand('twister',randseed); %sample seed = 343499
 n=firefly_no ; %number of fireflies
 MaxGeneration=maxgen;%number of pseudo time steps
 

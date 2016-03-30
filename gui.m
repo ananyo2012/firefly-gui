@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 28-Mar-2016 19:48:21
+% Last Modified by GUIDE v2.5 30-Mar-2016 22:16:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -87,11 +87,13 @@ function execute_Callback(hObject, eventdata, handles)
     dim=str2num(get(handles.dim,'String'));
     lbound=str2num(get(handles.lbound,'String'));
     ubound=str2num(get(handles.ubound,'String'));
+    randnseed=str2num(get(handles.randnseed,'String'));
+    randseed=str2num(get(handles.randseed,'String'));
     
     addpath(handles.path);
     fname =handles.file;
     filename = fname(1:length(fname)-2);
-    [mean_data, gbestval,worst, std_deviation, Mean, eltime] = firefly(firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
+    [mean_data, gbestval,worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
     
     comet(mean_data);
     
@@ -409,3 +411,49 @@ set(handles.display,'String', fullpathname);
 handles.file = filename;
 handles.path = pathname;
 guidata(hObject,handles);
+
+
+
+function randnseed_Callback(hObject, eventdata, handles)
+% hObject    handle to randnseed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of randnseed as text
+%        str2double(get(hObject,'String')) returns contents of randnseed as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function randnseed_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to randnseed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function randseed_Callback(hObject, eventdata, handles)
+% hObject    handle to randseed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of randseed as text
+%        str2double(get(hObject,'String')) returns contents of randseed as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function randseed_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to randseed (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

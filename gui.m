@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 30-Mar-2016 22:16:57
+% Last Modified by GUIDE v2.5 06-Apr-2016 13:28:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,9 @@ function gui_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for gui
 handles.output = hObject;
-
+title('No of iteration vs mean best fitness values of Firefly Algorithm');
+xlabel('No of iterations');
+ylabel('Mean of best fitness values');
 % Update handles structure
 guidata(hObject, handles);
 
@@ -95,13 +97,20 @@ function execute_Callback(hObject, eventdata, handles)
     filename = fname(1:length(fname)-2);
     [mean_data, gbestval,worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
     
-    comet(mean_data);
+    
+    plot(mean_data);
+    title('No of iteration vs mean best fitness values of Firefly Algorithm');
+    xlabel('No of iterations');
+    ylabel('Mean of best fitness values');
+   
+    handles.mean_data = mean_data;
     
     set(handles.gbest,'String',gbestval);
     set(handles.mean,'String',Mean);
     set(handles.std_deviation,'String',std_deviation);
     set(handles.worst,'String',worst);
     set(handles.eltime,'String',eltime);
+    guidata(hObject,handles);
 
 
 function runno_Callback(hObject, eventdata, handles)
@@ -457,3 +466,18 @@ function randseed_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+
+
+% --- Executes on button press in save.
+function save_Callback(hObject, eventdata, handles)
+f=figure;
+plot(handles.mean_data);
+title('No of iteration vs mean best fitness values of Firefly Algorithm');
+xlabel('No of iterations');
+ylabel('Mean of best fitness values');
+
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+

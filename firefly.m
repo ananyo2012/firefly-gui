@@ -10,7 +10,7 @@
 % by Xin-She Yang (Cambridge University) Copyright @2009   %
 % -------------------------------------------------------- %
 
-function [mean_data, gbestval, worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename,handles)
+function [mean_data, gbest_find, gbestval, worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,run_no,maxgen,alfa,beta,gama,dim,lbound,ubound,filename,handles)
 % parameters [n N_iteration alpha betamin gamma]
 tic;
 randn('state',randnseed); %sample seed = 243256

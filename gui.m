@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 06-Apr-2016 13:28:07
+% Last Modified by GUIDE v2.5 27-Jul-2016 16:35:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -80,6 +80,18 @@ function execute_Callback(hObject, eventdata, handles)
 % hObject    handle to execute (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    
+    set(handles.gbest_find,'String', '');
+    set(handles.gbest,'String','');
+    set(handles.mean,'String','');
+    set(handles.std_deviation,'String','');
+    set(handles.worst,'String','');
+    set(handles.eltime,'String','');
+    cla reset
+    title('No of iteration vs mean best fitness values of Firefly Algorithm');
+    xlabel('No of iterations');
+    ylabel('Mean of best fitness values');
+    
     firefly_no=str2num(get(handles.fireflyno,'String'));
     runno=str2num(get(handles.runno,'String'));
     maxgen=str2num(get(handles.maxgen,'String'));
@@ -95,8 +107,7 @@ function execute_Callback(hObject, eventdata, handles)
     addpath(handles.path);
     fname =handles.file;
     filename = fname(1:length(fname)-2);
-    [mean_data, gbestval,worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
-    
+    [mean_data, gbest_find, gbestval,worst, std_deviation, Mean, eltime] = firefly(randnseed,randseed,firefly_no,runno,maxgen,alpha,beta,gamma,dim,lbound,ubound,filename,handles);
     
     plot(mean_data);
     title('No of iteration vs mean best fitness values of Firefly Algorithm');
@@ -105,6 +116,7 @@ function execute_Callback(hObject, eventdata, handles)
    
     handles.mean_data = mean_data;
     
+    set(handles.gbest_find,'String', num2str(gbest_find));
     set(handles.gbest,'String',gbestval);
     set(handles.mean,'String',Mean);
     set(handles.std_deviation,'String',std_deviation);
@@ -414,7 +426,7 @@ function Browse_Callback(hObject, eventdata, handles)
 % hObject    handle to Browse (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[filename pathname] = uigetfile({'*.m'},'File Selector');
+[filename, pathname] = uigetfile({'*.m'},'File Selector');
 fullpathname = strcat(pathname, filename);
 set(handles.display,'String', fullpathname);
 handles.file = filename;
@@ -481,3 +493,26 @@ ylabel('Mean of best fitness values');
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+
+
+% --- Executes on button press in pause.
+function pause_Callback(hObject, eventdata, handles)
+% hObject    handle to pause (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+ uiwait
+
+% --- Executes on button press in resume.
+function resume_Callback(hObject, eventdata, handles)
+% hObject    handle to resume (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+  uiresume
+
+% --- Executes on button press in restart.
+function restart_Callback(hObject, eventdata, handles)
+% hObject    handle to restart (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+  close
+  gui
